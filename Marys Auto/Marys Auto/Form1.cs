@@ -16,20 +16,60 @@ namespace Marys_Auto
         {
             InitializeComponent();
         }
+        Customer customer = new Customer();
 
+        private void firstNameBox_TextChanged(object sender, EventArgs e)
+        {
+            customer.CustomerFirstName = firstNameBox.Text;
+        }
+
+        private void lastNameBox_TextChanged(object sender, EventArgs e)
+        {
+            customer.CustomerLastName = lastNameBox.Text;
+        }
+
+        private void cityBox_TextChanged(object sender, EventArgs e)
+        {
+            customer.CustomerCity = cityBox.Text;
+        }
+
+        private void stateBox_TextChanged(object sender, EventArgs e)
+        {
+            customer.CustomerState = stateBox.Text;
+        }
+
+        private void streetAdressBox_TextChanged(object sender, EventArgs e)
+        {
+            customer.CustomerStreetAddress = streetAdressBox.Text;
+        }
+
+        private void phoneNumberBox_TextChanged(object sender, EventArgs e)
+        {
+            customer.CustomerPhoneNumber = phoneNumberBox.Text;
+
+        }
+        Customer cus1 = new Customer();
+        
         private void submitButton_Click(object sender, EventArgs e)
         {
+
             try
             {
+                cus1.CustomersList.Add(customer);
+                customer.CustomersList.ForEach(x => MessageBox.Show($"{x.CustomerFirstName}, {x.CustomerLastName}, {x.CustomerPhoneNumber}, {x.CustomerStreetAddress}"));
                 //Customer Info Null Check
                 if (String.IsNullOrEmpty(firstNameBox.Text) || String.IsNullOrEmpty(lastNameBox.Text) || String.IsNullOrEmpty(cityBox.Text) || String.IsNullOrEmpty(stateBox.Text) || String.IsNullOrEmpty(streetAdressBox.Text) || String.IsNullOrEmpty(phoneNumberBox.Text))
                 {
                     MessageBox.Show("One or more of the boxes were left blank in the Customer Info section. Please fill out every box.","Customer Info Null");
                 }
-
+                //int num;
+                //int.TryParse(phoneNumberBox.Text, out num);
                 //Phone Number Check 
-                if (int.TryParse(phoneNumberBox.Text, out int num))
+                
+            foreach(char c in firstNameBox.Text)
+                if (Char.IsDigit(c))
                 {
+
                     if (phoneNumberBox.Text.Length == 10)
                     {
                         //Vehicle Info Null Check
@@ -66,13 +106,14 @@ namespace Marys_Auto
                     //If phone number isnt 10 digits long
                     else
                     {
-                        MessageBox.Show("That was an invalid phone number. Make sure you type out only numbers with nothing else. It should be 10 digits long.", "Phone Number Error");
+                        MessageBox.Show(phoneNumberBox.Text.Length.ToString());
+                        MessageBox.Show("That was an invalid phone number. Make sure you type out only numbers with nothing else. It should be 10 digits long.", "Phone Number Errors");
                     }
                 }
                 //If phone number has non ints in it
                 else
                 {
-                    MessageBox.Show("That was an invalid phone number. Make sure you type out only numbers with nothing else. It should be 10 digits long.", "Phone Number Error");
+                    MessageBox.Show("That was an invalid phone number. Make sure you type out only numbers with nothing else. It should be 10 digits long.", "Phone Number Errorss");
                 }
 
             }
@@ -115,5 +156,7 @@ namespace Marys_Auto
 
 
         }
+        
+        
     }
 }
